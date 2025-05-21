@@ -8,7 +8,7 @@ import Image from "next/image"
     <div className="root-layout">
         <nav>
           <Link href="/" className="flex items-center gap-2" >
-          <Image src="/Logo.png"  alt="logo" width={38} height={32} />
+          <Image src="/logo.png"  alt="logo" width={38} height={32} />
           <h2 className="text-primary-100">Career Coach</h2>
           </Link>
         </nav> 
