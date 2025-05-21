@@ -42,7 +42,7 @@ const InterviewCard = ({interviewId, userId, role, type,techstack, createdAt}: I
                     </div>
 
                     <p className="line-clamp-2 mt-5">
-                        {feedback?.finalAssessment || "You haven't taken the interview yet. Tke it now and imporve your skills."}
+                        {feedback?.finalAssessment || "You haven't taken the interview yet. Take it now and imporve your skills."}
                     </p>
                 </div>
 
