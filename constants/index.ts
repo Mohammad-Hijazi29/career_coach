@@ -1,4 +1,4 @@
-// import { CreateAssistantDTO } from "@vapi-ai/web/dist/api";
+import { CreateAssistantDTO } from "@vapi-ai/web/dist/api";
 // import { z } from "zod";
 
 export const mappings = {
@@ -188,6 +188,205 @@ export const mappings = {
 //   areasForImprovement: z.array(z.string()),
 //   finalAssessment: z.string(),
 // });
+
+export const generator= {
+  "name": "career-coach",
+  "nodes": [
+    {
+      "name": "start",
+      "type": "conversation",
+      "isStart": true,
+      "metadata": {
+        "position": {
+          "x": -441.6216049132745,
+          "y": -118.36743880955402
+        }
+      },
+      "prompt": "Greet the user and help them create a new AI Interview.",
+      "voice": {
+        "model": "aura-2",
+        "voiceId": "thalia",
+        "provider": "deepgram"
+      },
+      "variableExtractionPlan": {
+        "output": [
+          {
+            "title": "role",
+            "description": "What role would you like to train for? \n",
+            "type": "string",
+            "enum": []
+          },
+          {
+            "title": "type",
+            "description": "Are you aiming for a technical , behavioral, or mixed interview?",
+            "type": "string",
+            "enum": []
+          },
+          {
+            "title": "level",
+            "description": "The job experience level",
+            "type": "string",
+            "enum": []
+          },
+          {
+            "title": "techstack",
+            "description": "A list of technologies to cover during the interviews",
+            "type": "string",
+            "enum": []
+          },
+          {
+            "title": "amount",
+            "description": "How many questions would you like to me to prepare for you?",
+            "type": "string",
+            "enum": []
+          }
+        ]
+      },
+      "messagePlan": {
+        "firstMessage": "Hey there!"
+      }
+    },
+    {
+      "name": "conversation_1",
+      "type": "conversation",
+      "metadata": {
+        "position": {
+          "x": -147.644237124265,
+          "y": 149.400239171694
+        }
+      },
+      "prompt": "Say that the interview will be generated shortly.\n",
+      "voice": {
+        "model": "aura-2",
+        "voiceId": "thalia",
+        "provider": "deepgram"
+      },
+      "variableExtractionPlan": {
+        "output": []
+      }
+    },
+    {
+      "name": "conversation_1747512046488",
+      "type": "conversation",
+      "metadata": {
+        "position": {
+          "x": -106.07384851528953,
+          "y": 784.8684190400928
+        }
+      },
+      "prompt": "Thank the user for the conversation and inform them that the interview has been generated successfully .",
+      "voice": {
+        "model": "aura-2",
+        "voiceId": "thalia",
+        "provider": "deepgram"
+      }
+    },
+    {
+      "name": "hangup_1747512399374",
+      "type": "hangup",
+      "metadata": {
+        "position": {
+          "x": -12.02562130118125,
+          "y": 1071.573690012117
+        }
+      },
+      "messagePlan": {
+        "firstMessage": "Alright, have a nice day!"
+      }
+    },
+    {
+      "name": "node_1747930116685",
+      "type": "apiRequest",
+      "metadata": {
+        "position": {
+          "x": -135.9458549558248,
+          "y": 367.2266943160184
+        }
+      },
+      "method": "POST",
+      "url": `${process.env.NEXT_PUBLIC_BASE_URL}/api/vapi/generate`,
+      "headers": {
+        "type": "object",
+        "properties": {}
+      },
+      "body": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "description": "",
+            "value": "{{role}}"
+          },
+          "type": {
+            "type": "string",
+            "description": "",
+            "value": "{{type}}"
+          },
+          "level": {
+            "type": "string",
+            "description": "",
+            "value": "{{level}}"
+          },
+          "amount": {
+            "type": "string",
+            "description": "",
+            "value": "{{amount}}"
+          },
+          "userid": {
+            "type": "string",
+            "description": "",
+            "value": "{{userid}}"
+          },
+          "techstack": {
+            "type": "string",
+            "description": "",
+            "value": "{{techstack}}"
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {}
+      },
+      "mode": "blocking",
+      "hooks": []
+    }
+  ],
+  "edges": [
+    {
+      "from": "start",
+      "to": "conversation_1",
+      "condition": {
+        "type": "ai",
+        "prompt": "if user provides all the required variables\n"
+      }
+    },
+    {
+      "from": "conversation_1747512046488",
+      "to": "hangup_1747512399374",
+      "condition": {
+        "type": "ai",
+        "prompt": ""
+      }
+    },
+    {
+      "from": "conversation_1",
+      "to": "node_1747930116685",
+      "condition": {
+        "type": "ai",
+        "prompt": ""
+      }
+    },
+    {
+      "from": "node_1747930116685",
+      "to": "conversation_1747512046488",
+      "condition": {
+        "type": "ai",
+        "prompt": ""
+      }
+    }
+  ]
+}
 
 export const interviewCovers = [
   "/adobe.png",
