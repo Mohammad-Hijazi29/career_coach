@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import {useState,useEffect} from "react";
 import {vapi}  from "@/lib/vapi.sdk"
 import { generator } from "@/constants";
+import { interviewer } from "@/constants";
 
 
 enum CallStatus {
@@ -64,15 +65,13 @@ const Agent = ({userName, userId, type}: AgentProps) => {
         if(callStatus === CallStatus.FINISHED) router.push('/');
     }, [messages, callStatus,type,userId])
 
-    const handleCall = async () =>{
-        setCallStatus(CallStatus.CONNECTING);
 
-        await vapi.start(generator, {
-            variableValues: {
-            username: userName,
-            userid: userId,
-            },
-        });
+    const handleCall = async () => {
+  
+    setCallStatus(CallStatus.CONNECTING);
+
+    await vapi.start(interviewer);
+    
     }
 
     const handleDisconnect = async() => {
