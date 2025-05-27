@@ -1,11 +1,15 @@
 import React from 'react'
-import {Button} from "@/components/ui/button"
-import Link from 'next/link'
 import Image from 'next/image'
-import {dummyInterviews} from '@/constants'
-import InterviewCard from '@/components/InterviewCard'
+import {getCurrentUser} from "@/lib/actions/auth.action"
 
- const Page = () =>{
+import TemplateForm from '@/components/TemplateForm'
+import TemplateLibrary from '@/components/TemplateLibrary'
+import SideBanner from '@/components/SideBanner'
+
+
+ const Page = async () =>{
+
+  const user = await getCurrentUser();
   return(
     <>
 
@@ -15,49 +19,21 @@ import InterviewCard from '@/components/InterviewCard'
               <p className='text-lg'>
                   Get real-time interview questions with instant, personalized feedback.
               </p>
-              
-              <Button asChild className="btn-primary max-sm:w-full">
-                <Link href="/interview">Start an Interview</Link>
-              </Button>
+            
         </div>
 
 
         <Image src="/robot.png" alt="robot pic" width={400}  height={400} className="max-sm:hidden" />
       </section>
 
-      <section className="flex flex-col gap-6 mt-8">
-        <h2>Your Interviews</h2>
+      <div className="form-banner">
+          <SideBanner />
+          <TemplateForm />
+      </div>
 
+    <TemplateLibrary/>
 
-        <div className="interviews-section">
-       
-            {
-            dummyInterviews.map((interview)=> (
-            <InterviewCard {...interview} key={interview.id}/>
-          ))
-        }
-        
-          
-        </div>
-
-      </section>
-
-      <section className="flex flex-col gap-6 mt-8">
-        <h2>Take an interview</h2>
-
-        <div className="interviews-section">
-        
-            {
-            dummyInterviews.map((interview)=> (
-            <InterviewCard {...interview} key={interview.id}/>
-          ))
-        }
-       
-
-          {/*<p>You haven't taken any interviews yet</p>*/}
-        </div>
-      </section>
-
+     
 
 
 

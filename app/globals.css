@@ -332,3 +332,34 @@
     transform: translateY(0);
   }
 }
+
+
+@layer components {
+  .interview-form {
+    @apply bg-card text-card-foreground rounded-xl shadow-lg border border-border;
+  }
+
+  .input-style {
+    @apply w-full p-3 rounded-lg bg-input text-foreground border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition;
+  }
+}
+
+
+@layer components {
+  .form-banner {
+    @apply flex flex-col md:flex-row gap-6 bg-card p-6 rounded-xl shadow-md mt-10;
+  }
+
+    .side-banner {
+    @apply flex flex-col gap-6 w-full lg:w-1/2 p-6 bg-background rounded-lg shadow border border-border;
+  }
+  .side-banner > div {
+    @apply flex items-start gap-4;
+  }
+
+  .template-form-wrapper {
+    @apply w-full md:w-1/2;
+  }
+}
+
+

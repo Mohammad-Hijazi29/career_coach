@@ -49,11 +49,11 @@ interface InterviewCardProps {
 
 interface AgentProps {
   userName: string;
-  userId?: string;
-  interviewId?: string;
-  feedbackId?: string;
-  type: "generate" | "interview";
-  questions?: string[];
+  userId: string;
+  presetRole?: string;
+  presetInterviewType?: 'technical' | 'behavioral' | 'mixed';
+  presetAmount?: number;
+  presetQuestions?: string[];
 }
 
 interface RouteParams {
