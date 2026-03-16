@@ -4,7 +4,7 @@ import {getAuth} from 'firebase/auth'
 import {getFirestore} from 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: "",
+  apiKey: "AIzaSyA2mWK_0kKsQ94ag1HUOdWfsqwjWOG5_Ik",
   authDomain: "careercoach-7dbf8.firebaseapp.com",
   projectId: "careercoach-7dbf8",
   storageBucket: "careercoach-7dbf8.firebasestorage.app",
